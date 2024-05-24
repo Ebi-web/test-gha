@@ -21,7 +21,7 @@ jobs:
 
   step-c:
     runs-on: ubuntu-latest
-    if: ${{ always() }}
+    if: ${{ !cancelled() }}
     steps:
       - run: echo stepc is running...
     needs:
