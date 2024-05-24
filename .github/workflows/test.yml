@@ -1,0 +1,28 @@
+name: test
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+jobs:
+  step-a:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo stepa is running...
+
+  step-b:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
+    needs:
+      - step-a
+
+
+  step-c:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo stepc is running...
+    needs:
+      - step-a
+      - step-b
