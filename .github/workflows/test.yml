@@ -9,30 +9,12 @@ jobs:
   step-a:
     runs-on: ubuntu-latest
     steps:
-      - run: echo stepa is running...
+      - run: exit 1
 
   step-b:
+    if: ${{ always() && github.event.pull_request.merged == true}}
     runs-on: ubuntu-latest
     steps:
-      - run: exit 1
+      - run: echo stepb is running...
     needs:
       - step-a
-
-
-  step-c:
-    runs-on: ubuntu-latest
-    if: ${{ !cancelled() }}
-    steps:
-      - run: echo stepc is running...
-    needs:
-      - step-a
-      - step-b
-
-  step-d:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo stepc is running...
-    needs:
-      - step-a
-      - step-b
-      - step-c
