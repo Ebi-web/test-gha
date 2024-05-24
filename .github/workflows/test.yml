@@ -21,8 +21,18 @@ jobs:
 
   step-c:
     runs-on: ubuntu-latest
+    if: ${{ always() }}
     steps:
       - run: echo stepc is running...
     needs:
       - step-a
       - step-b
+
+  step-d:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo stepc is running...
+    needs:
+      - step-a
+      - step-b
+      - step-c
